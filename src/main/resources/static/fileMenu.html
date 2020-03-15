@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <link href="../layui/css/layui.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="../layui/layui.all.js"></script>
+
+</head>
+<body>
+<div id="main_right"></div>
+<script>
+    function getData(url) {
+        var data = [];
+        $.ajax({
+            url:url,    //后台数据请求地址
+            type: "get",
+            async: false,
+            success: function (resut) {
+                data = resut.data;
+            }
+        });
+        return data;
+    }
+    layui.use('tree', function () {
+        var tree = layui.tree;
+        //渲染
+        var inst1 = tree.render({
+            elem: '#main_right'  //绑定元素
+            // , url: "/springboot/menu"
+            , data: getData("/api/menu")
+        });
+    });
+</script>
+</body>
+</html>
